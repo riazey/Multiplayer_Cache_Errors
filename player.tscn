@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd64jnuwk6hq3"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_mldah"]
+[ext_resource type="Texture2D" uid="uid://dqxjrmnxufn0b" path="res://Med_Zotlyn.png" id="2_mxl3j"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hj5er"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wub1f"]
+properties/0/path = NodePath(".:scale")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:frame")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_mldah")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_hj5er")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(383, 280)
+texture = ExtResource("2_mxl3j")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Sprite"]
+replication_config = SubResource("SceneReplicationConfig_wub1f")
